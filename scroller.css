@@ -1,0 +1,13 @@
+:where(.chat-container, textarea)::-webkit-scrollbar {
+  width: 6px;
+}
+
+:where(.chat-container, textarea)::-webkit-scrollbar-track {
+  border-radius: 25px;
+  background-color: var(--incoming-chat-bg);
+}
+
+:where(.chat-container, textarea)::-webkit-scrollbar-thumb {
+  border-radius: 25px;
+  background-color: var(--icon-color);
+}
