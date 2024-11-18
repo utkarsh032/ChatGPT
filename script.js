@@ -42,6 +42,9 @@ const getChatResponse = async () => {
           <img src="./img/chatgpt-6.svg" alt="GPT">
           <p>${botText}</p>
         </div>
+           <span class="material-symbols-outlined">
+          content_copy
+        </span>
       </div>
     `;
 
