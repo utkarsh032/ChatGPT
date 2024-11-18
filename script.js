@@ -6,6 +6,11 @@ let userText = null;
 const RAPIDAPI_HOST = 'chat-gpt26.p.rapidapi.com';
 const RAPIDAPI_KEY = 'd77ccd0640msh93573b429f0c962p1521d6jsnea3af6a3d486';
 
+const loadDataFromLocalStorage = () => {
+  chatContainer.innerHTML = localStorage.getItem('all-chats')
+}
+loadDataFromLocalStorage()
+
 const createElement = (html, className) => {
   const chatDiv = document.createElement('div');
   chatDiv.classList.add('chat', className);
@@ -63,8 +68,16 @@ const getChatResponse = async () => {
     const errorDiv = createElement(errorHtml, 'incoming');
     chatContainer.appendChild(errorDiv);
     chatContainer.scrollTop = chatContainer.scrollHeight;
+    localStorage.setItem('all-chats', chatContainer.innerHTML)
   }
 };
+
+const copyResponse = (copyBtn) => {
+  const responseTextElement = copyBtn.parentElement.querySelector('p')
+  navigator.clipboard.writeText(responseTextElement.textContent)
+  coptBtn.textContent = 'Done'
+  setTimeout(() => coptBtn.textContent = 'content_copy', 1000)
+}
 
 const showTypingAnimation = () => {
   const html = `
@@ -77,6 +90,7 @@ const showTypingAnimation = () => {
             <div class="typing-dot" style="--delay:0.4s"></div>
           </div>
         </div>
+        <span onclick="copyResponse(this)" class="material-symbols-rounded">content_copy</span>
       </div>
   `;
   const typingDiv = createElement(html, 'incoming');
